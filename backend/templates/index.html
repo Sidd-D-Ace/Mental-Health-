@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Mind Space</h1>
+
+        <!-- Add the resized image -->
+        <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo" class="logo">
+
+
+        <p>How are you feeling today?</p>
+        <div class="categories">
+            <button class="category-btn" onclick="showPositiveAdvice()">😊 Feeling Good</button>
+
+            <button class="category-btn" onclick="showSection('heavy-mind')">🧠 Heavy Mind</button>
+        </div>
+
+        <!-- Sections -->
+        <div id="feeling-good" class="hidden section">
+            <h2>Maintain Your Positivity</h2>
+            <p>Here are some tips to keep your good mood going!</p>
+            <ul class="feeling-good-list">
+                <li>→ Practice gratitude</li>
+                <li>→ Listen to uplifting music</li>
+                <li>→ Engage in hobbies you love</li>
+                <li>→ Appreciate the kindness of others</li>
+            </ul>
+        </div>
+
+        <div id="heavy-mind" class="hidden section">
+            <h2>Heavy Mind - Select Your Emotions</h2>
+            <p>Choose the emotions you're experiencing:</p>
+            <div class="emotions">
+                <button onclick="showAdvice('anxiety')">😟 Anxiety</button>
+                <button onclick="showAdvice('stress')">😓 Stress</button>
+                <button onclick="showAdvice('overthinking')">🤯 Overthinking</button>
+                <button onclick="showAdvice('sadness')">😢 Sadness</button>
+                <button onclick="showAdvice('frustration')">😤 Frustration</button>
+                <button onclick="showAdvice('anger')">😡 Anger</button>
+                
+            </div>
+        </div>
+
+        <!-- Advice Section -->
+        <div id="advice-section" class="hidden section"></div>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

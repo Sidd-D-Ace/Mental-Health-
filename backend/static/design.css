@@ -1,0 +1,130 @@
+
+
+
+ body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #005eff, #d640b3);
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    width: 60%;
+    max-width: 850px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #333;
+}
+
+.categories {
+    margin-top: 30px;
+}
+
+.category-btn {
+    background-color: #4bbd50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+}
+
+.category-btn:hover {
+    background-color: #e03f5a;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+    display: none;
+}
+
+.section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 8px;
+}
+
+.emotions button {
+    background-color: #268cde;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.emotions button:hover {
+    background-color: #e03f5a;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.advice-list {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+}
+
+.advice-list li {
+    margin: 5px 0;
+}
+
+.feeling-good-list {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+}
+
+.feeling-good-list li {
+    margin: 5px 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: url('static/images/nature.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
+
+.logo {
+    max-width: 40%;
+    max-height: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
