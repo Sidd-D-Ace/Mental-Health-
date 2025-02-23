@@ -14,7 +14,7 @@ if not GENAI_API_KEY:
     raise ValueError("❌ Google AI API Key not found! Please provide a valid API key.")
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyBfMI7wWgF-bp6rLKPqWPxcBuaWt9UhKR8", transport="rest") 
+genai.configure(api_key=GENAI_API_KEY, transport="rest") 
 
 def generate_response(emotion):
     try:
