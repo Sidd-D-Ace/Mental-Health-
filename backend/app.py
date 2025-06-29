@@ -8,7 +8,7 @@ CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 
 
 # Manually set the Google AI API key
-GENAI_API_KEY = "AIzaSyBfMI7wWgF-bp6rLKPqWPxcBuaWt9UhKR8"  # Replace with your actual key
+GENAI_API_KEY = "key"  # Replace with your actual key
 
 if not GENAI_API_KEY:
     raise ValueError("❌ Google AI API Key not found! Please provide a valid API key.")
