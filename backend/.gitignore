@@ -1,0 +1,12 @@
+
+.env
+__pycache__/
+*.pyc
+venv/
+env/
+.pytest_cache/
+# Docker logs
+*.log
+# OS files
+.DS_Store
+Thumbs.db

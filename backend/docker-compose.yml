@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mind-space-app:
+    build: .
+    container_name: mind_space_container
+    restart: always
+    ports:
+      - "80:10000"  # Maps AWS Port 80 to Flask Port 10000
+    env_file:
+      - .env        # Automatically loads your API Key from the .env file
+    environment:
+      - PORT=10000  # Tells Flask which port to use
