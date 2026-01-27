@@ -1,15 +1,20 @@
-
+import os
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import google.generativeai as genai
+from dotenv import load_dotenv, find_dotenv
 
+
+
+print(load_dotenv(find_dotenv()))
 app = Flask(__name__, template_folder="templates")
 CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
+print(os.environ.keys())
 
 
 # Manually set the Google AI API key
-GENAI_API_KEY = "key"  # Replace with your actual key
-
+GENAI_API_KEY = os.getenv("GENAI_API_KEY")  # Replace with your actual key
+print(GENAI_API_KEY)
 if not GENAI_API_KEY:
     raise ValueError("❌ Google AI API Key not found! Please provide a valid API key.")
 
@@ -18,14 +23,23 @@ genai.configure(api_key=GENAI_API_KEY, transport="rest")
 
 def generate_response(emotion):
     try:
-        prompt = f"Provide a comforting and supportive message for someone feeling {emotion}."
-        model = genai.GenerativeModel("gemini-pro")
+        # UPDATED PROMPT: Added specific instructions to avoid markdown
+        prompt = (
+            f"You're a Therapist. Provide a comforting and supportive message for someone feeling {emotion}. "
+            "IMPORTANT: Provide ONLY the raw HTML content (e.g., <p>...</p>). "
+            "Do NOT wrap the response in markdown code blocks like ```html. "
+            "Do NOT include the <!DOCTYPE html> or <html> tags. Just the body content."
+        )
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt)
 
         if not response.text:
             return "⚠️ No response received from the AI."
 
-        return response.text
+        # EXTRA SAFETY: Strip backticks just in case Gemini ignores instructions
+        clean_text = response.text.replace("```html", "").replace("```", "").strip()
+        
+        return clean_text
 
     except Exception as e:
         print(f"❌ Error in AI response: {str(e)}")

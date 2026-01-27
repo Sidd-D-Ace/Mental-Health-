@@ -128,3 +128,45 @@ body::before {
     display: block;
     margin: 0 auto;
 }
+
+/* Add this to your design.css */
+
+.loading-text {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Ensure the AI-generated HTML content fits your design */
+.ai-content {
+    text-align: left;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    border-left: 5px solid #268cde;
+}
+
+#loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    background-color: #268cde;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
