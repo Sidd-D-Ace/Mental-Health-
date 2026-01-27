@@ -8,8 +8,7 @@ from dotenv import load_dotenv, find_dotenv
 
 print(load_dotenv(find_dotenv()))
 app = Flask(__name__, template_folder="templates")
-CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
-print(os.environ.keys())
+CORS(app)
 
 
 # Manually set the Google AI API key
