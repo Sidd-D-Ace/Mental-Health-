@@ -3,58 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Health Support</title>
+    <title>Mind Space - AI Mental Health Support</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Mind Space</h1>
-
-        <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo" class="logo">
-
-        <p>How are you feeling today?</p>
-        
-        <div class="categories">
-            <button class="category-btn" onclick="showPositiveAdvice()">😊 Feeling Good</button>
-            <button class="category-btn" onclick="showSection('heavy-mind')">🧠 Heavy Mind</button>
-        </div>
-
-        <div id="feeling-good" class="hidden section">
-            <h2>Maintain Your Positivity</h2>
-            <p>Here are some tips to keep your good mood going!</p>
-            <ul class="feeling-good-list">
-                <li>→ Practice gratitude</li>
-                <li>→ Listen to uplifting music</li>
-                <li>→ Engage in hobbies you love</li>
-                <li>→ Appreciate the kindness of others</li>
-            </ul>
-        </div>
-
-        <div id="heavy-mind" class="hidden section">
-            <h2>Heavy Mind - Select Your Emotions</h2>
-            <p>Choose the emotions you're experiencing:</p>
-            
-            <div class="emotions">
-                <button onclick="showAdvice('anxiety')">😟 Anxiety</button>
-                <button onclick="showAdvice('stress')">😓 Stress</button>
-                <button onclick="showAdvice('overthinking')">🤯 Overthinking</button>
-                <button onclick="showAdvice('sadness')">😢 Sadness</button>
-                <button onclick="showAdvice('frustration')">😤 Frustration</button>
-                <button onclick="showAdvice('anger')">😡 Anger</button>
-            </div>
-
-            <div id="loading-container" style="display: none;">
-                <div id="loader">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Mind Space Logo" class="sidebar-logo">
+                    <h1 class="brand-name">Mind Space</h1>
                 </div>
-                <p class="loading-text">Please wait a moment...</p>
             </div>
-        </div> <div id="advice-section" class="hidden section"></div>
-        
+            <p class="sidebar-subtitle">Your AI Mental Health Companion</p>
+            <button class="new-conversation-btn" onclick="resetConversation()">+ New Conversation</button>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <!-- Header -->
+            <header class="chat-header">
+                <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+                    🌙
+                </button>
+
+                <h2>Welcome to Mind Space</h2>
+                <p>Your personal AI mental health support companion</p>
+            </header>
+
+            <!-- Messages Area -->
+            <div id="chat-feed" class="messages-area">
+                
+                <div id="intro-content">
+                    <div class="welcome-message">
+                        <h3>How are you feeling today?</h3>
+                        <p>Select a category or type below to get started</p>
+                    </div>
+
+                    <div id="gate-section" class="gate-section">
+                        <div class="gate-title">Select Your Current State</div>
+                        <div class="gate-buttons">
+                            <button class="gate-btn positive" onclick="handleTransition('Feeling Good', 'positive')">
+                                <span class="btn-emoji">😊</span>
+                                <span class="btn-text">Feeling Good</span>
+                                <span class="btn-desc">Maintain positivity</span>
+                            </button>
+                            <button class="gate-btn negative" onclick="handleTransition('Heavy Mind', 'heavy')">
+                                <span class="btn-emoji">🧠</span>
+                                <span class="btn-text">Heavy Mind</span>
+                                <span class="btn-desc">Get support</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="heavy-mind" class="hidden message-section">
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <p><strong>I'm here to help.</strong> What emotions are you experiencing right now?</p>
+                        </div>
+                    </div>
+                    <div class="emotions-grid">
+                        <button class="emotion-btn" onclick="handleEmotion('anxiety')">😟 Anxiety</button>
+                        <button class="emotion-btn" onclick="handleEmotion('stress')">😓 Stress</button>
+                        <button class="emotion-btn" onclick="handleEmotion('overthinking')">🤯 Overthinking</button>
+                        <button class="emotion-btn" onclick="handleEmotion('sadness')">😢 Sadness</button>
+                        <button class="emotion-btn" onclick="handleEmotion('frustration')">😤 Frustration</button>
+                        <button class="emotion-btn" onclick="handleEmotion('anger')">😡 Anger</button>
+                    </div>
+                </div>
+
+                <div id="feeling-good" class="hidden message-section">
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <p><strong>That's wonderful!</strong> Here are some tips...</p>
+                             <ul class="tips-list">
+                                <li>Practice gratitude daily</li>
+                                <li>Listen to uplifting music</li>
+                                <li>Engage in hobbies you love</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="back-btn" onclick="resetConversation()">← Start Over</button>
+                </div>
+
+                <div id="advice-section" class="hidden message-section"></div>
+
+                <div id="loading-container" class="hidden loading-indicator">
+                    <div class="loader-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <p class="loading-text">Thinking...</p>
+                </div>
+            </div>
+
+            <footer class="chat-footer">
+                <div class="input-wrapper">
+                    <input type="text" id="user-input" placeholder="Type how you are feeling..." autocomplete="off">
+                    <button id="send-btn" onclick="handleUserMessage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+        </main>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="/static/script.js"></script>
 </body>
 </html>
