@@ -13,7 +13,6 @@ CORS(app)
 
 # Manually set the Google AI API key
 GENAI_API_KEY = os.getenv("GENAI_API_KEY")  # Replace with your actual key
-print(GENAI_API_KEY)
 if not GENAI_API_KEY:
     raise ValueError("❌ Google AI API Key not found! Please provide a valid API key.")
 

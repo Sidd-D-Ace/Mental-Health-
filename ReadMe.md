@@ -44,6 +44,22 @@ The app will be available at: **http://127.0.0.1:5000/**
 - **Request Body:** JSON `{ "emotion": "sadness" }`
 - **Response:** `{ "advice": "Stay strong! You are not alone." }`
 
+## 🚀 Production CI/CD & Deployment Architecture
+
+This project features a fully automated, event-driven CI/CD lifecycle managed via Jenkins and containerized using Docker on AWS infrastructure.
+
+### DevOps Highlights:
+- **Automated Webhook Triggers:** Configured Git SCM hooks to automatically launch the pipeline on target `push` and `pull request` lifecycle actions.
+- **Concurrent Quality Gates:** Utilizes Jenkins declarative parallel syntax to evaluate linting structures across frontend and backend file systems simultaneously.
+- **Optimized Containerization:** The backend `Dockerfile` leverages `PYTHONDONTWRITEBYTECODE=1` to minimize container filesystem bloat and `PYTHONUNBUFFERED=1` to enable zero-lag log observability.
+- **Secure Runtime Injection:** Credentials (such as the Gemini API token) are managed entirely outside the code wrapper via Jenkins Credentials Manager and safely bound into the container runtime layout.
+
+### Production Pipeline Execution Layout:
+1. **Linting & Code Formatting Validation** (Parallel Gates)
+2. **Docker Image Build Context Execution** (Targeting port `10000`)
+3. **Automated Docker Hub Registry Handshake & Push**
+4. **Target Server Rolling Update Deployment** (Exposing host port `5000`)
+
 ---
 💙 *Developed to support mental well-being with the power of AI!*
 
