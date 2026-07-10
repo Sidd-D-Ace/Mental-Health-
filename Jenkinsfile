@@ -62,7 +62,7 @@ pipeline {
                 sh """
                     docker run -d \
                       --name ${IMAGE_NAME} \
-                      -p 5000:5000 \
+                      -p 5000:10000 \
                       -e GENAI_API_KEY='${GENAI_API_KEY}' \
                       ${REGISTRY_USER}/${IMAGE_NAME}:latest
                 """
